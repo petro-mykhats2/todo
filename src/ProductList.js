@@ -1,36 +1,62 @@
 import React from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { removeProduct } from "./products"
+import { removeFromCart, changeQuantity } from "./products"
 
-function ProductList() {
-  const products = useSelector((state) => state.products)
-
+const Cart = () => {
   const dispatch = useDispatch()
+  const cartItems = useSelector((state) => state.cartItems)
 
-  function handleRemoveProduct(index) {
-    dispatch(removeProduct(index))
+  const handleRemoveFromCart = (product) => {
+    dispatch(removeFromCart(product))
   }
 
-  const totalAmount = products.reduce(
-    (total, product) => total + product.price,
+  const handleChangeQuantity = (product, newQuantity) => {
+    dispatch(changeQuantity(product, newQuantity))
+  }
+
+  const cartTotal = cartItems.reduce(
+    (total, currentItem) => total + currentItem.price * currentItem.quantity,
     0
   )
 
   return (
     <div>
-      <h2>Product List</h2>
-      <ul>
-        {products.map((product, index) => (
-          <li key={index}>
-            {product.name}: {product.price}
-            <button onClick={() => handleRemoveProduct(index)}>Remove</button>
+      <h2>Корзина</h2>
+      {cartItems.length === 0 ? (
+        <div>Корзина пуста</div>
+      ) : (
+        <ul>
+          {cartItems.map((item) => (
+            <li key={item.id}>
+              {item.name}
+              <button
+                onClick={() => handleChangeQuantity(item, item.quantity - 1)}
+              >
+                -
+              </button>
+              {item.quantity}
+              <button
+                onClick={() => handleChangeQuantity(item, item.quantity + 1)}
+              >
+                +
+              </button>
+              ${item.price}${item.price * item.quantity}
+              <div>
+                <button onClick={() => handleRemoveFromCart(item)}>
+                  Видалити
+                </button>
+              </div>
+              <hr />
+            </li>
+          ))}
+          <li>
+            <div>Загальна вартість:</div>
+            <div>${cartTotal}</div>
           </li>
-        ))}
-      </ul>
-
-      <p>Total Amount: {totalAmount}</p>
+        </ul>
+      )}
     </div>
   )
 }
 
-export default ProductList
+export default Cart
