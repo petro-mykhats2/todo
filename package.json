@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
+    "netlify-cli": "^13.0.1",
     "react-devtools": "^4.27.2"
   }
 }

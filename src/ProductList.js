@@ -5,7 +5,12 @@ import { removeFromCart, changeQuantity } from "./products"
 const Cart = () => {
   const dispatch = useDispatch()
   const cartItems = useSelector((state) => state.cartItems)
+  // const total = useSelector((state) => state.total)
 
+  const handleShowCart = (cartItems) => {
+    console.log(cartItems)
+    console.log(cartTotal)
+  }
   const handleRemoveFromCart = (product) => {
     dispatch(removeFromCart(product))
   }
@@ -25,7 +30,7 @@ const Cart = () => {
       {cartItems.length === 0 ? (
         <div>Корзина пуста</div>
       ) : (
-        <ul>
+        <form>
           {cartItems.map((item) => (
             <li key={item.id}>
               {item.name}
@@ -53,7 +58,8 @@ const Cart = () => {
             <div>Загальна вартість:</div>
             <div>${cartTotal}</div>
           </li>
-        </ul>
+          <button onSubmit={handleShowCart(cartItems)}>Замовити</button>
+        </form>
       )}
     </div>
   )
