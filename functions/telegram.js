@@ -4,7 +4,7 @@ const token = "YOUR_TELEGRAM_BOT_TOKEN"
 const bot = new TelegramBot(token, { polling: false })
 
 exports.handler = async (event) => {
-  const message = event.body
+  const message = JSON.parse(event.body)
   const chatId = 735449634
 
   try {
