@@ -3,7 +3,7 @@ const token = "YOUR_TELEGRAM_BOT_TOKEN"
 
 const bot = new TelegramBot(token, { polling: false })
 
-exports.handler = async (event) => {
+exports.handler = async function (event, context) {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" }
   }
