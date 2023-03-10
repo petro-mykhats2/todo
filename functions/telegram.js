@@ -1,0 +1,22 @@
+const TelegramBot = require("node-telegram-bot-api")
+const token = "YOUR_TELEGRAM_BOT_TOKEN"
+
+const bot = new TelegramBot(token, { polling: false })
+
+exports.handler = async (event) => {
+  const message = event.body
+  const chatId = 735449634
+
+  try {
+    await bot.sendMessage(chatId, message)
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: "Message sent" }),
+    }
+  } catch (error) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: "Error sending message" }),
+    }
+  }
+}

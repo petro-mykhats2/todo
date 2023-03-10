@@ -24,7 +24,7 @@ const ContactForm = () => {
       }),
     }
 
-    fetch(".netlify/functions/myFunction", requestOptions).then((response) =>
+    fetch(".netlify/functions/telegram", requestOptions).then((response) =>
       response.json()
     )
   }
