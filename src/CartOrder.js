@@ -11,26 +11,6 @@ const ContactForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    // fetch("/.netlify/functions/myFunction", {
-    //   method: "POST",
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Error("Network response was not ok")
-    //     }
-    //     return response.json()
-    //   })
-    //   .then((data) => {
-    //     if (!data) {
-    //       throw new Error("Data is empty")
-    //     }
-    //     console.log("Data sent successfully:", data)
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error sending data:", error)
-    //   })
-
     const requestOptions = {
       method: "POST",
       headers: {
