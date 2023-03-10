@@ -12,10 +12,9 @@ exports.handler = async function (event, context) {
     return { statusCode: 400, body: "Body is empty!" }
   }
   const chatId = 735449634
+  const message = JSON.parse(event.body)
 
-  let message
   try {
-    const message = JSON.parse(event.body)
     await bot.sendMessage(chatId, message)
     return {
       statusCode: 200,
